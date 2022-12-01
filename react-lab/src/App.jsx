@@ -1,29 +1,53 @@
 import './App.css'
 
+const variables = {
+  firstName: 'First name',
+  lastName: 'Last name',
+  occupation: 'Occupation'
+}
+
 const data = [
   { firstName: "John", lastName: "Silver", occupation: "PirateCaptain" },
-
+  { firstName: "John", lastName: "Silver", occupation: "PirateCaptain" },
+  { firstName: "John", lastName: "Silver", occupation: "PirateCaptain" },
 ]
-  
+
+const products = [
+  { name: "John", cost: "Silver" },
+]
+
+const product1 = {name: "Silver"}
+
+function Product(props){
+  return(
+    <div>
+      I'm an {props.product.name}
+    </div>
+  )
+}
+
 function App() {
   return (
     <div className="App">
+      <div>
       <table>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Occupation</th>
-        </tr>
-        {data.map((val, key) => {
-          return (
-            <tr key={key}>
-              <td>{val.firstName}</td>
-              <td>{val.lastName}</td>
-              <td>{val.occupation}</td>
-            </tr>
-          )
-        })}
+        {Object.keys(variables).map((key, rowIndex) =>
+          <tr key={key}>
+            <th style={{ fontWeight: '700', borderTop: rowIndex === 0 ? '2px solid #fff' : '0px' }}>{variables[key]}</th>
+            {data.map((item, index) =>
+              <td key={index} style={{ borderTop: rowIndex === 0 ? '2px solid #fff' : '0px' }}>{item[key]}</td>
+            )}
+          </tr>
+        )}
       </table>
+      </div>
+      
+
+      <br></br>
+
+      <div>
+        <Product product = {products.map}/>
+      </div>
     </div>
   );
 }
