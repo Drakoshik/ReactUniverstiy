@@ -33,7 +33,7 @@ const Counter = ({ counter, onChange }) => {
 }
 
 const App = () => {
-  const [totalArr, setTotalArr] = useState(counters.map(i => ({ id: i.id, count: i.initial })))
+  const [totalObj, setTotalObj] = useState({})
 
   return (
     <>
@@ -42,17 +42,13 @@ const App = () => {
           key={c.id}
           counter={c}
           onChange={(id, count) => {
-            const tmp = [...totalArr];
-            const index = tmp.findIndex(i => i.id === id)
-            if (index !== -1) tmp[index].count = count;
-            else tmp.push({ id, count })
-            setTotalArr(tmp)
+            setTotalObj(current => ({ ...current, [id]: count }))
           }}
         />
       )}
 
       <div>
-        Total: {totalArr.reduce((p, c) => p += c.count, 0)}
+        Total: {Object.values(totalObj).reduce((p, c) => p += c, 0)}
       </div>
     </>
   );
