@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 
+
 const descriptionVariables = {
   firstName: 'First name',
   lastName: 'Last name',
@@ -16,10 +17,12 @@ const personalData = [
 const product = {name: "Silver", cost: "2000" }
 
 const cities = [
-  {id: 1, name: "Kyiv", image: ""},
-  {id: 2, name: "New York", image: ""},
-  {id: 3, name: "RIO", image: ""}
+  {id: 1, name: "Kyiv", image: 'images/Kyiv.jpg'},
+  {id: 2, name: "New York", image: 'images/NY.jpg'},
+  {id: 3, name: "RIO", image: 'images/RIO.jpg'}
 ]
+
+
 
 function ShowProduct({name, cost}){
   return(
@@ -35,9 +38,11 @@ class City extends React.Component{
   }
 }
 
+const city = "ldkjfg";
+
 class List extends React.Component{
   render(){
-    return <select name = "" id = "cities" >
+    return <select name = "" id = "cities">
       {this.props.data.map((city) => 
       <City key = {city.id} city = {city}>{city.name}</City>)}
     </select>
@@ -59,9 +64,13 @@ function BuildTable({variables, data}){
   )
 }
 
-function App() {
-  return (
-    <div className="App">
+
+export default class App extends React.Component {
+  state = {
+    image:  'images/Kyiv.jpg'
+  }
+  render(){
+    return <>
       <div>
         <BuildTable variables={descriptionVariables} data = {personalData}/>
       </div>
@@ -72,16 +81,20 @@ function App() {
       <br></br>
       <List data = {cities}></List>
       <br></br>
-      {/* <select onChange={e => {
-            console.log(e.target.value)
-          }}>
-        <option value="Сложение">+</option>
-        <option value="Вычитание">−</option>
-        <option value="Умножение">×</option>
-        <option value="Деление">÷</option>
-      </select> */}
-    </div>
-  );
-}
+      <br></br>
+      <br></br>
+      <select name = "" id = "cities" onChange={e => {
+                this.setState({image: cities.map((city) =>
+                  city.name == e.target.value ? city.image : null)})
+                console.log(e.target.value) 
+           }}>
+      {cities.map((city) => 
+      <City key = {city.id} city = {city}>{city.name}</City>)}
+    </select>
+      <p>{this.state.image}</p>
+      <img src={this.state.image} width="130" height="100"/>
+      <img src={'images/RIO.jpg'} width="130" height="100"/>
+      </>
 
-export default App
+  }
+}
