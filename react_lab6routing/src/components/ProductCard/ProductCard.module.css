@@ -1,0 +1,10 @@
+.showOnHover{
+    opacity: 0;
+}
+
+.MyCard:hover .showOnHover{
+    opacity: 100;
+}
+.MyCard{
+    margin: 10px;
+}
